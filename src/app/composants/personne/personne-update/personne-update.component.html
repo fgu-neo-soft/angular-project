@@ -1,0 +1,20 @@
+<ng-container *ngIf="personne">
+    <form #myForm="ngForm" (ngSubmit)="updatePerson()">
+        <div><label for="nom">Nom :</label>
+            <input type="text" name="nom" [(ngModel)]="personne.nom" required #nom="ngModel">
+        </div>
+        <div [hidden]="nom.valid || nom.pristine" style="color:red">
+            Le nom est obligatoire</div>
+        <div><label for="prenom">Prénom :</label>
+            <input type="text" name="prenom" [(ngModel)]="personne.prenom" required #prenom="ngModel">
+        </div>
+        <div [hidden]="prenom.valid || prenom.pristine" style="color:red">
+            Le prénom est obligatoire</div>
+        <div>
+            <button [disabled]="!myForm.valid" class="btn btn-primary">
+                Modifier
+            </button>
+            <button class="btn btn-warning" (click)="back()">Annuler</button>
+        </div>
+    </form>
+</ng-container>

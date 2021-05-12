@@ -1,0 +1,11 @@
+.rouge {
+ color: rgb(255, 0, 0);
+}
+
+.bleu {
+    color: blue;
+}
+
+.fond-bleu {
+    background-color: blue;
+}

@@ -1,0 +1,155 @@
+<h1>{{ title }}</h1>
+<h1 [textContent]=title></h1>
+
+<ul>
+    <ng-container *ngFor="let elt of tasks">
+        <li *ngIf="elt.status == 'done'">
+            {{ elt.name }} : {{ elt.status }}
+        </li>
+    </ng-container>
+</ul>
+
+<ul>
+    <ng-container *ngFor="let elt of tasks">
+        <li [ngClass]="elt.status == 'done' ? 'bleu' : 'rouge'">
+            {{ elt.name }} : {{ elt.status }}
+        </li>
+    </ng-container>
+</ul>
+
+
+<!--  Q1 Ecrire un script Angular qui permet d’afficher dans une liste HTML les
+    elements de la liste taches (on affiche que les nom et status). Afficher les taches qui
+    qui sont terminées, cad, qui ont le statut DONE  -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Reste A faire</h2>
+                <ul class="list-group">
+                    <ul *ngFor="let elt of tasks">
+                        <div *ngIf="elt.status == 'done'">
+                            <h4>Tache : {{ elt.name }} -- Statut : {{ elt.status }}</h4>
+                        </div>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<!-- Q2 Vous modifierez votre code précédent en implementant la directive ngClass qui selon le statut de la liste
+    tache la couleur variera (rouge ou bleu)
+    Les taches qui ont le statut Done seront affichées en bleu sinon en rouge
+    -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Reste A faire</h2>
+                <ul class="list-group">
+                    <ul *ngFor="let elt of tasks">
+                        <div [ngClass]="elt.status == 'done' ? 'bleu' : 'rouge' ">
+                            <h4>Tache : {{ elt.name }} -- Status : {{ elt.status }}</h4>
+                        </div>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<p>Nom : {{ personne.nom }}</p>
+<p>Prénom : {{ personne.prenom }}</p>
+<p>Tout : {{ personne | json }}</p>
+
+
+<ul>
+    <li>{{ tab[0] }}</li>
+    <li>{{ tab[1] }}</li>
+    <li>{{ tab[2] }}</li>
+    <li>{{ tab[3] }}</li>
+</ul>
+<ul>
+    <li *ngFor="let elt of tab ; index as i ; first as first">
+        {{ i }} : {{ elt }} : {{ first }}
+    </li>
+</ul>
+
+<p>{{ direBonjour() }}</p>
+
+<ul>
+    <li *ngIf="tab[1] % 2 != 0">
+        {{ tab[1] }} est impair !
+    </li>
+</ul>
+
+<ul>
+    <li *ngIf="tab[1] % 2 != 0 ; then si ; else sinon">
+
+    </li>
+    <ng-template #si>
+        <li>{{ tab[1] }} est impair !</li>
+    </ng-template>
+    <ng-template #sinon>
+        <li>{{ tab[1] }} est pair !</li>
+    </ng-template>
+</ul>
+
+<ng-container *ngFor="let elt of tab">
+    <li *ngIf="elt % 2 != 0 ; then si ; else sinon"></li>
+    <ng-template #si>
+        <li>{{ elt }} est impair !</li>
+    </ng-template>
+    <ng-template #sinon>
+        <li>{{ elt }} est pair !</li>
+    </ng-template>
+</ng-container>
+
+<!-- Ecrire un code HTML, en utilisant les directives Angular, qui permet
+        d’afficher sous forme d’une liste chaque element du tableau precedent
+        avec un message defini ainsi :
+        Si la valeur est comprise entre 0 et 9 : echec
+        Si elle est entre 10 et 13 : moyen
+        Si elle est entre 14 et 16 : bien
+        Sinon : tres bien -->
+
+<ul>
+    <ng-container *ngFor="let elt of tab">
+        <ng-container [ngSwitch]="true">
+            <li *ngSwitchCase=" elt >= 0 && elt <= 9 ">
+                {{ elt }} : echec
+            </li>
+            <li *ngSwitchCase=" elt >= 10 && elt <= 13 ">
+                {{ elt }} : moyen
+            </li>
+            <li *ngSwitchCase=" elt >= 14 && elt <= 16 ">
+                {{ elt }} : bien
+            </li>
+            <li *ngSwitchCase=" elt > 16 ">
+                {{ elt }} : tres bien
+            </li>
+            <li *ngSwitchDefault>
+                autre
+            </li>
+        </ng-container>
+    </ng-container>
+</ul>
+
+<p [textContent]=nom [ngStyle]="{backgroundColor: couleur}"></p>
+<p [textContent]=nom [ngStyle]="{color: couleur}"></p>
+<p [textContent]=nom [ngStyle]="{backgroundColor: getBackgroundColor(), color: getColor()}"></p>
+
+<p [ngClass]="{ 'rouge' : nom == 'Wick', 'bleu' : nom != 'Wick' }">{{ nom }}</p>
+<p [ngClass]="nom == 'Wick' ? 'rouge' : 'bleu'">{{ nom }}</p>
+<p [ngClass]="nom == 'Wick' ? 'rouge' : 'bleu'">{{ nom }}</p>
+
+<ul>
+    <ng-container *ngFor="let elt of tab">
+        <li [ngClass]="{ 'rouge' : elt % 2 == 0, 'fond-bleu' : elt % 3 == 0}">{{ elt }}</li>
+    </ng-container>
+</ul>
+
+<ul>
+    <ng-container *ngFor="let elt of tab">
+        <li *ngIf="elt % 3 == 0" [ngClass]="estPair(elt) ? 'rouge' : 'bleu'">{{ elt }}</li>
+    </ng-container>
+</ul>

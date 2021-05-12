@@ -1,0 +1,27 @@
+<!-- <input type="text" #nom><br>
+<button (click)="direBonjour(nom.value)">Click</button><br>
+<p>Bonjour {{ result }}</p> -->
+<!-- <input type="text" [(ngModel)]="nom"><br>
+<p>Bonjour {{ nom }}</p> -->
+<form #myForm="ngForm" (ngSubmit)="ajouterPersonne(myForm)">
+    <div>Nom :
+        <input type="text" name="nom" [(ngModel)]="personne.nom" required #nom="ngModel">
+    </div>
+    <div [hidden]="nom.valid || nom.pristine" style="color:red">
+        Le nom est obligatoire</div>
+    <div>Prénom :
+        <input type="text" name="prenom" [(ngModel)]="personne.prenom" required #prenom="ngModel">
+    </div>
+    <div [hidden]="prenom.valid || prenom.pristine" style="color:red">
+        Le prénom est obligatoire</div>
+    <div>
+        <button [disabled]=!myForm.valid>
+            Ajouter
+        </button>
+    </div>
+</form>
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let personne of personnes;">
+        {{ personne.nom }} {{ personne.prenom }}
+    </li>
+</ul>

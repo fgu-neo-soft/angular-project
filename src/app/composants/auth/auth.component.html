@@ -1,0 +1,13 @@
+<h1>Page d’authentification</h1>
+<form (ngSubmit)="isAuthenticated()">
+    <div>
+        Nom d’utilisateur :
+        <input type=text [(ngModel)]=username name=username>
+    </div>
+    <div>
+        Mot de passe :
+        <input type="password" [(ngModel)]=password name=password>
+        <button type=submit>Se connecter</button>
+    </div>
+    <div [hidden]='erreur'>Identifiants incorrects</div>
+</form>
